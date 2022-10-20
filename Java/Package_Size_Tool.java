@@ -4,6 +4,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Base64;
 
+/**
+ * 指定包大小生成工具，采用 json 文件格式，可以提供 json 文件压缩前后两种生成算法。
+ */
 public class Package_Size_Tool {
     public static void main(String[] args) {
         // 需要写入的文件的路径
