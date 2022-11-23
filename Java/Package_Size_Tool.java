@@ -10,35 +10,35 @@ import java.util.Base64;
 public class Package_Size_Tool {
     public static void main(String[] args) {
         // 需要写入的文件的路径
-        String filePath = "/Users/ddx/Desktop/useless/relese_10.3.0_package.json";
-        algorithm_1(filePath, false, "UTF-8", 1250);
+        String filePath = "/Users/dudongxu/Desktop/useless/relese_10.4.0_package.json";
+        algorithm_1(filePath, false, "UTF-8", 80);
     }
 
     /**
      * 填补包大小算法1：填补 json 数据，提供压缩后文件大小。
-     * 
-     * @param FilePath        文件路径
-     * @param append          是否采用追加模式写入
-     * @param charsetName     写入格式
-     * @param fileSize(bytes) 期望文件大小
+     *
+     * @param FilePath     文件路径
+     * @param append       是否采用追加模式写入
+     * @param charsetName  写入格式
+     * @param fileSize(kb) 期望文件大小
      */
     private static void algorithm_1(String FilePath, boolean append, String charsetName, int fileSize) {
         try {
             if (fileSize <= 0) {
                 return;
             }
-            long line = (long) (fileSize / 0.024);
+            long line = (long) (fileSize / 0.0478);
             File file = new File(FilePath);
             FileOutputStream fos = new FileOutputStream(file, append);
             OutputStreamWriter osw = new OutputStreamWriter(fos, charsetName);
 
-            long number = Long.MIN_VALUE;
+            long curTime = System.currentTimeMillis();
             osw.write("{\r\n");
             for (int i = 1; i <= line; i++) {
-                number = number * i + i;
-                String base64 = Base64.getEncoder()
-                        .encodeToString(String.valueOf(number).getBytes(charsetName));
-                osw.write('"' + String.valueOf(number) + '"' + ":" + '"' + base64 + '"' + ",");
+                String key = getMD5(String.valueOf(i + curTime).getBytes());
+                String value = Base64.getEncoder()
+                        .encodeToString(key.getBytes(charsetName));
+                osw.write('"' + key + '"' + ":" + '"' + value + '"' + ",");
                 osw.write("\r\n");
             }
             osw.write("}");
@@ -64,18 +64,19 @@ public class Package_Size_Tool {
             OutputStreamWriter osw = new OutputStreamWriter(fos, charsetName);
 
             FileInputStream fin = null;
-            long number = Long.MIN_VALUE;
             int i = 1;
+            long curTime = System.currentTimeMillis();
+            
             osw.write("{\r\n");
             while (true) {
-                number = number * i + i;
-                i++;
-                String base64 = Base64.getEncoder()
-                        .encodeToString(String.valueOf(number).getBytes(charsetName));
-                osw.write('"' + String.valueOf(number) + '"' + ":" + '"' + base64 + '"' + ",");
+                String key = getMD5(String.valueOf(i + curTime).getBytes());
+                String value = Base64.getEncoder()
+                        .encodeToString(key.getBytes(charsetName));
+                osw.write('"' + key + '"' + ":" + '"' + value + '"' + ",");
                 osw.write("\r\n");
+                i++;
                 fin = new FileInputStream(file);
-                if (fin.getChannel().size() > 102400) {
+                if (fin.getChannel().size() > fileSize) {
                     fin.close();
                     break;
                 }
@@ -86,5 +87,23 @@ public class Package_Size_Tool {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+        /**
+     * 采用md5 数字签名算法生成key，减少key的碰撞性。
+     * @param bytes 源字节数组
+     * @return 十六制进的字符串
+     */
+    private static String getMD5(byte[] bytes) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            // 计算md5函数
+            md.update(bytes);
+            // digest()最后确定返回md5 hash值，返回值为8为字符串。因为md5
+            return new BigInteger(1, md.digest()).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
