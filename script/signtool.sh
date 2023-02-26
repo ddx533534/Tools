@@ -1,4 +1,6 @@
-etting default key path here
+#!/bin/bash
+
+# setting default key path here
 
 # local OPTIND
 
@@ -106,5 +108,5 @@ fi
 
 #echo "packagePath: ${packagePath}"
 
-jarsigner -verbose -digestalg ${digestalg} -sigalg ${sigalg} -keystore ${keyPath} -storepass ${storepass} -keypass ${keypass} ${packagePath} ${aliases}
+jarsigner -verbose -digestalg ${digestalg} -sigalg ${sigalg} -keystore ${keyPath} -storepass ${storepass} -keypass ${keypass}   -signedjar "./signed.apk" ${packagePath} ${aliases}
 
