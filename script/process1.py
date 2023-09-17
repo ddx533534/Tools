@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 # 打开文件（如果文件不存在，将会创建一个空文件）
-file_path = '1core-1process.txt'  # 替换为你的文件路径
+file_path = '2core/2core-1process.txt'  # 替换为你的文件路径
 
 # 初始化两个空数组来保存以0开头的数据
 data_starting_with_0 = []

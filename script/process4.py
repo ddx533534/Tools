@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 
 # 打开文件（如果文件不存在，将会创建一个空文件）
-file_path = '1core-4process.txt'  # 替换为你的文件路径
+file_path = '2core/2core-4process.txt'  # 替换为你的文件路径
 
 # 初始化两个空数组来保存以0,1,2和3开头的数据
 data_starting_with_0 = []
@@ -45,7 +45,7 @@ data_dict3 = dict(zip(x3, y3))
 data_dict4 = dict(zip(x4, y4))
 
 # 创建 z 范围从 0 到 250
-x_values = range(0, 501)
+x_values = range(0, 251)
 
 # 生成对应的 y 值列表
 y_values1 = [data_dict1[x] if x in data_dict1 else -1 for x in x_values]
