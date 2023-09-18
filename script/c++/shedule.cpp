@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     int processCount = atoi(argv[1]);
     int processTime = atoi(argv[2]);
     int processInterval = atoi(argv[3]);
-    int recordTimes = processTime % processInterval;
+    int recordTimes = processTime / processInterval;
     struct timespec *logbuf = (timespec *)malloc(recordTimes * sizeof(struct timespec));
     if (!logbuf)
     {
@@ -125,7 +125,6 @@ int main(int argc, char *argv[])
     struct timespec start;
     clock_gettime(CLOCK_MONOTONIC, &start);
     int i, ncreated;
-    printf("start came into the main process");
     for (i = 0, ncreated = 0; i < processCount; i++, ncreated++)
     {
         // record  every subprocess id;
@@ -157,13 +156,21 @@ int main(int argc, char *argv[])
     {
         for (size_t i = 0; i < ncreated; i++)
         {
-            if (wait(NULL) < 0)
+            if (kill(pids[i], SIGINT) < 0)
             {
                 warn("killing %d subprocess fialed!", pids[i]);
             }
+        }
+    }
+    for (size_t i = 0; i < ncreated; i++)
+    {
+        if (wait(NULL) < 0)
+        {
+            warn("killing %d subprocess fialed!", pids[i]);
         }
     }
     free(logbuf);
     free(pids);
     exit(ret);
 }
+
