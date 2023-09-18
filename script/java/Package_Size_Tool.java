@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 /**
@@ -10,8 +13,8 @@ import java.util.Base64;
 public class Package_Size_Tool {
     public static void main(String[] args) {
         // 需要写入的文件的路径
-        String filePath = "/Users/dudongxu/Desktop/useless/relese_10.4.0_package.json";
-        algorithm_1(filePath, false, "UTF-8", 80);
+        String filePath = "/Users/ddx/Desktop/useless/reqid_white_list.json";
+        algorithm_1(filePath, false, "UTF-8", 50);
     }
 
     /**
@@ -66,7 +69,7 @@ public class Package_Size_Tool {
             FileInputStream fin = null;
             int i = 1;
             long curTime = System.currentTimeMillis();
-            
+
             osw.write("{\r\n");
             while (true) {
                 String key = getMD5(String.valueOf(i + curTime).getBytes());
@@ -89,8 +92,9 @@ public class Package_Size_Tool {
         }
     }
 
-        /**
+    /**
      * 采用md5 数字签名算法生成key，减少key的碰撞性。
+     * 
      * @param bytes 源字节数组
      * @return 十六制进的字符串
      */
