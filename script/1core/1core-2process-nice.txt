@@ -1,6 +1,3 @@
-estimating workload which takes just one milisecond!
-estimation continue 505650
-end estimation! 
 0	4	1
 0	5	2
 0	7	3
@@ -101,9 +98,6 @@ end estimation!
 0	149	98
 0	151	99
 0	152	100
-estimating workload which takes just one milisecond!
-estimation continue 505650
-end estimation! 
 1	1	1
 1	2	2
 1	24	3
@@ -204,6 +198,3 @@ end estimation!
 1	228	98
 1	229	99
 1	231	100
-estimating workload which takes just one milisecond!
-estimation continue 505650
-end estimation! 

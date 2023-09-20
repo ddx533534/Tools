@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 
 
-# 打开文件（如果文件不存在，将会创建一个空文件）
-file_path = '2core/2core-2process.txt'  # 替换为你的文件路径
+# 打开文件（如果文件不存在，将会创建一个空文# 件）
+file_path = '../1core/1core-2process-nice.txt'  # 替换为你的文件路径
 
 # 初始化两个空数组来保存以0和1开头的数据
 data_starting_with_0 = []
@@ -31,7 +31,7 @@ data_dict1 = dict(zip(x1, y1))
 data_dict2 = dict(zip(x2, y2))
 
 # 创建 z 范围从 0 到 250
-x_values = range(0, 121)
+x_values = range(0, max(list(data_dict1.keys())[-1],list(data_dict2.keys())[-1]) + 1)
 
 # 生成对应的 y 值列表
 y_values1 = [data_dict1[x] if x in data_dict1 else -1 for x in x_values]
@@ -47,6 +47,8 @@ ax1.scatter(x_values, y_values1,s=1, label='group1', color='blue', marker='o')
 ax1.set_xlabel('time(ms)')
 ax1.set_ylabel('progress(%)', color='blue')
 ax1.tick_params(axis='y', labelcolor='blue')
+plt.legend(loc='upper left')  # 设置图例在左上角
+
 
 # 创建次坐标轴（共享x轴）
 ax2 = ax1.twinx()
@@ -57,6 +59,8 @@ ax2.scatter(x_values, y_values2,s=1, label='group2', color='red', marker='o')
 # 设置刻度
 plt.xticks(range(0, int(max(x_values)) + 1, 10))
 plt.yticks(range(0, int(max(max(y_values1, y_values2))) + 1, 25))
+
+plt.legend(loc='upper right')  # 设置图例在右上角
 
 # 显示图形
 plt.show()
