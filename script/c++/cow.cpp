@@ -47,8 +47,11 @@ static void parent_fn()
 
 int main()
 {
-    char *buf;
     printf("-- free memory info before allocation \n");
+    fflush(stdout);
+    system("free");
+
+    char *buf;
     p = (char *)malloc(ALLOCATION_SIZE);
     if (p == NULL)
     {
