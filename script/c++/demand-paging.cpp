@@ -5,9 +5,9 @@
 #include <string.h>
 #include <err.h>
 
-#define ALLOCATION_SIZE 100 * 1024
+#define ALLOCATION_SIZE 100 * 1024 * 1024
 #define CYCLE 10
-#define PAGE_SIZE 2048
+#define PAGE_SIZE 4096
 
 int main()
 {
