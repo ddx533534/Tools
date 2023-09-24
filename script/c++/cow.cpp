@@ -33,7 +33,7 @@ static void child_fn(char *p)
     fflush(stdout);
     system(command);
 
-    printf("-- free memory info before memory access \n");
+    printf("-- free memory info after memory access \n");
     fflush(stdout);
     system("free");
     exit(EXIT_SUCCESS);
@@ -57,29 +57,29 @@ int main()
     {
         err(EXIT_FAILURE, "malloc failed!");
     }
-    int i, ret;
+    int i;
     for (i = 0; i < ALLOCATION_SIZE; i += PAGE_SIZE)
     {
-        ret = p[i];
+        p[i] = 0;
     }
-    printf("-- free memory after before memory write \n");
+    printf("-- free memory after memory write \n");
     fflush(stdout);
     system("free");
 
-    // printf("-- free memory info before fork \n");
-    // fflush(stdout);
-    // system("free");
-    // pid_t pid = fork();
-    // if (pid == 0)
-    // {
-    //     child_fn(p);
-    // }
-    // else if (pid > 0)
-    // {
-    //     parent_fn();
-    // }
-    // else
-    // {
-    //     err(EXIT_FAILURE, "fork failed!");
-    // }
+    printf("-- free memory info before fork \n");
+    fflush(stdout);
+    system("free");
+    pid_t pid = fork();
+    if (pid == 0)
+    {
+        child_fn(p);
+    }
+    else if (pid > 0)
+    {
+        parent_fn();
+    }
+    else
+    {
+        err(EXIT_FAILURE, "fork failed!");
+    }
 }
