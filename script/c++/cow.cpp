@@ -57,10 +57,10 @@ int main()
     {
         err(EXIT_FAILURE, "malloc failed!");
     }
-    int i;
+    int i, ret;
     for (i = 0; i < ALLOCATION_SIZE; i += PAGE_SIZE)
     {
-        p[i] = 0;
+        ret = p[i];
     }
     printf("-- free memory after before memory write \n");
     fflush(stdout);
