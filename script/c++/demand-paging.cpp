@@ -38,7 +38,7 @@ int main()
         {
             t = time(NULL);
             s = ctime(&t);
-            printf("%.*s:allocated %dKB\n", (int(strlen(s) - 1)), i / 1024);
+            printf("%.*s:allocated %dKB\n", s, (int(strlen(s) - 1)), i / 1024);
             sleep(1);
         }
     }
