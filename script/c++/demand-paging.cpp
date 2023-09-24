@@ -30,8 +30,8 @@ int main()
     s = ctime(&t);
     printf("%.*s:allocated 100KB , please press Enter key:\n", (int(strlen(s) - 1)), s);
     getchar();
-
-    for (int i = 0; i <= ALLOCATION_SIZE; i += PAGE_SIZE)
+    int i;
+    for (i = 0; i < ALLOCATION_SIZE; i += PAGE_SIZE)
     {
         p[i] = 0;
         if (i / (ALLOCATION_SIZE / CYCLE) != 0 && i % (ALLOCATION_SIZE / CYCLE) == 0)
@@ -42,5 +42,9 @@ int main()
             sleep(1);
         }
     }
+    t = time(NULL);
+    s = ctime(&t);
+    printf("%.*s:allocated %dKB\n", (int(strlen(s) - 1)), s, i / 1024);
+    sleep(1);
     exit(EXIT_SUCCESS);
 }
