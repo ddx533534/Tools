@@ -62,20 +62,24 @@ int main()
     {
         p[i] = 0;
     }
-    printf("-- free memory info before fork \n");
+    printf("-- free memory after before memory write \n");
     fflush(stdout);
     system("free");
-    pid_t pid = fork();
-    if (pid == 0)
-    {
-        child_fn(p);
-    }
-    else if (pid > 0)
-    {
-        parent_fn();
-    }
-    else
-    {
-        err(EXIT_FAILURE, "fork failed!");
-    }
+
+    // printf("-- free memory info before fork \n");
+    // fflush(stdout);
+    // system("free");
+    // pid_t pid = fork();
+    // if (pid == 0)
+    // {
+    //     child_fn(p);
+    // }
+    // else if (pid > 0)
+    // {
+    //     parent_fn();
+    // }
+    // else
+    // {
+    //     err(EXIT_FAILURE, "fork failed!");
+    // }
 }
