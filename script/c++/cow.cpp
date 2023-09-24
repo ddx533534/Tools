@@ -17,6 +17,7 @@ static void child_fn(char *p)
     printf("-- child ps info before memory access \n");
     fflush(stdout);
 
+    // PID（进程 ID）、comm（命令名称）、vsz（虚拟内存大小）、rss（物理内存占用）、min_flt（小的页面错误次数）和 maj_flt（大的页面错误次数）
     snprintf(command, BUFFER_SIZE, "ps -o pid,comm,vsz,rss,min_flt,maj_flt | grep %d", getpid());
     system(command);
 
@@ -47,6 +48,7 @@ static void parent_fn()
 int main()
 {
     char *buf;
+    printf("-- free memory info before allocation \n");
     p = (char *)malloc(ALLOCATION_SIZE);
     if (p == NULL)
     {
