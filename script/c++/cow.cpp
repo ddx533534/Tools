@@ -17,7 +17,7 @@ static void child_fn(char *p)
     printf("-- child ps info before memory access \n");
     fflush(stdout);
 
-    snprintf(command, BUFFER_SIZE, "ps -o pid, comm,vsz,rss,min_flt,maj_flt|grep '^*%d'", getpid());
+    snprintf(command, BUFFER_SIZE, "ps -o pid, comm,vsz,rss,min_flt,maj_flt | grep %d", getpid());
     system(command);
 
     printf("-- free memory info before memory access \n");
