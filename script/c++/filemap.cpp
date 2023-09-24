@@ -10,6 +10,7 @@
 #define BUFFER_SIZE 1000
 #define ALLOCATION_SIZE 10 * 1024
 
+// 静态数组会随生命周期结束而销毁，不需要主动销毁
 static char command[BUFFER_SIZE];
 
 /**
@@ -19,7 +20,7 @@ static char command[BUFFER_SIZE];
  * @param command 指令
  * @param ret 释放内存时当前程序的状态
  */
-void release(int fpd, void *file_contents, char *command, int ret)
+void release(int fpd, void *file_contents, int ret)
 {
    if (fpd == -1)
    {
@@ -32,10 +33,6 @@ void release(int fpd, void *file_contents, char *command, int ret)
    if (file_contents != NULL)
    {
       munmap(file_contents, ALLOCATION_SIZE);
-   }
-   if (command != NULL)
-   {
-      free(command);
    }
    exit(ret);
 }
@@ -52,27 +49,28 @@ int main()
    int fpd = open("testmmap", O_RDWR);
    if (fpd == -1)
    {
-      release(fpd, NULL, command, EXIT_FAILURE);
+      release(fpd, NULL, EXIT_FAILURE);
    }
    char *file_contents;
    file_contents = (char *)mmap(NULL, ALLOCATION_SIZE,
                                 PROT_READ | PROT_WRITE, MAP_SHARED, fpd, 0);
    if (file_contents == (char *)-1)
    {
-      release(fpd, file_contents, command, EXIT_FAILURE);
+      release(fpd, file_contents, EXIT_FAILURE);
    }
+   printf("mmap succeeded! address= %p, size = 0x%x\n", file_contents, ALLOCATION_SIZE);
    puts("----- after map file -----");
    system(command);
    fflush(stdout);
 
    puts("----- map content is -----");
-   printf("%c\n", file_contents);
+   printf("%s\n", file_contents);
 
    puts("----- write map content -----");
    char new_content[] = "hello world!";
    memcpy(file_contents, new_content, strlen(new_content));
 
    puts("----- after writing content is -----");
-   printf("%c\n", file_contents);
-   release(fpd, file_contents, command, EXIT_SUCCESS);
+   printf("%s\n", file_contents);
+   release(fpd, file_contents, EXIT_SUCCESS);
 }
