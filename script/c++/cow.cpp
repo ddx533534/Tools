@@ -58,7 +58,7 @@ int main()
     }
     printf("-- free memory info before fork \n");
     fflush(stdout);
-    system("error");
+    system("free");
     pid_t pid = fork();
     if (pid == 0)
     {
