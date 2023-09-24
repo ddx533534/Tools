@@ -6,7 +6,7 @@
 #include <err.h>
 
 #define ALLOCATION_SIZE 100 * 1024
-#define PROGRESS 10 * 1024
+#define CYCLE 10
 #define PAGE_SIZE 4096
 
 int main()
@@ -34,7 +34,7 @@ int main()
     for (int i = 0; i <= ALLOCATION_SIZE; i += PAGE_SIZE)
     {
         p[i] = 0;
-        if (i % PROGRESS == 0)
+        if (i / (ALLOCATION_SIZE / CYCLE) != 0 && i % (ALLOCATION_SIZE / CYCLE) == 0)
         {
             t = time(NULL);
             s = ctime(&t);
