@@ -47,7 +47,7 @@ int main()
 {
     char *buf;
     p = (char *)malloc(ALLOCATION_SIZE);
-    if (p = NULL)
+    if (p == NULL)
     {
         err(EXIT_FAILURE, "malloc failed!");
     }
