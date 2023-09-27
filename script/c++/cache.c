@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     }
 
     char *buffer;
-    buffer = (char *)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_SHARED, -1, 0);
+    buffer = (void *)mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_SHARED, -1, 0);
     if (buffer == (char *)-1)
     {
         err(EXIT_FAILURE, "mmap failed");
