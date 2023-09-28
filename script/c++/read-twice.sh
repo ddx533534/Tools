@@ -1,4 +1,5 @@
 #!/bin/bash
+# 结合 sar -B 命令可以采集文件内容读入页面缓存时，总共发生多少次页面调入？
 rm -f testfile
 echo "$(date):start file creation!"
 dd if=/dev/zero of=testfile oflag=direct bs=1M count=1K
