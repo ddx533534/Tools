@@ -7,7 +7,7 @@
 #include <err.h>
 
 #define ALLOCATION_SIZE 100 * 1024 * 1024
-#define PAGE_SIZE 4096
+#define PAGE_SIZE 8192
 
 #define BUFFER_SIZE 100
 static char command[BUFFER_SIZE];
