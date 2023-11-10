@@ -2,9 +2,27 @@ import org.json.JSONObject;
 
 public class Json_Tool {
     public static void main(String[] args) {
-        // 需要判断的字符串
-        String str = "";
-        algorithm_1(str);
+        testLoop();
+    }
+
+    static void testLoop() {
+        int LIMIT = 1000000;
+        int loop = 100;
+        int i = 0;
+        int res = 0;
+        long start = System.currentTimeMillis();
+        while (true) {
+            if (i > LIMIT) {
+                break;
+            }
+            i++;
+            for (int j = 0; j < loop; j++) {
+                res += j;
+            }
+            res = 0;
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("time cost " + (end - start) + "ms");
     }
 
     /**
