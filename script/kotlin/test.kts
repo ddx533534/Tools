@@ -54,6 +54,10 @@ fun testRange() {
     println("time cost ${end - start} ms")
 }
 
+fun testCollection(){
+    
+}
+
 try {
     testRange()
 }
