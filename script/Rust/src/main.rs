@@ -8,9 +8,11 @@ mod method;
 mod option;
 mod pattern_match;
 mod _trait_deep;
+mod dyn_vec;
+mod _hashmap;
 
 fn main() {
-    let direction = pattern_match::Direction::East;
+    // let direction = pattern_match::Direction::East;
     // pattern_match::match_direction(direction);
     // pattern_match::match_statement();
     // pattern_match::match_bind();
@@ -36,9 +38,9 @@ fn main() {
     // let sex = method::Sex::Female;
     // println!("是男的吗？{:?}",sex.is_male());
     // generics::test_array();
-    let animal = _trait::Animal::new("moneky".to_string(), "buru".to_string());
-    let animal1 = _trait::Animal::new("pig".to_string(), "buru".to_string());
-    let sport = _trait::Sport::new("basketball".to_string(), "ball".to_string());
+    // let animal = _trait::Animal::new("moneky".to_string(), "buru".to_string());
+    // let animal1 = _trait::Animal::new("pig".to_string(), "buru".to_string());
+    // let sport = _trait::Sport::new("basketball".to_string(), "ball".to_string());
     // _trait::report_summary(&animal);
     // _trait::trait_bound_multi_p(&animal, &sport);
     // _trait::trait_bound_multi_p_same(&animal1, &animal);
@@ -79,6 +81,12 @@ fn main() {
     // screen.draw_components();
 
     // _trait_deep::test_();
-    _trait_deep::test_out_trait();
+    // _trait_deep::test_out_trait();
 
+
+    // dyn_vec::test_dyn_vector();
+    // dyn_vec::test_dyn_vector();
+    // dyn_vec::test_sort();
+    _hashmap::test_map();
 }
+
