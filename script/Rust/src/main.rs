@@ -1,4 +1,5 @@
 use _trait::Summary;
+
 mod _trait;
 mod _trait_object;
 mod _trait_test;
@@ -10,6 +11,7 @@ mod pattern_match;
 mod _trait_deep;
 mod dyn_vec;
 mod _hashmap;
+mod lifecycle;
 
 fn main() {
     // let direction = pattern_match::Direction::East;
@@ -87,6 +89,11 @@ fn main() {
     // dyn_vec::test_dyn_vector();
     // dyn_vec::test_dyn_vector();
     // dyn_vec::test_sort();
-    _hashmap::test_map();
+    // _hashmap::test_map();
+
+    // lifecycle::test_life_cycle();
+    // lifecycle::test_life_cycle_function();
+    lifecycle::test_lifecycle_struct();
 }
+
 

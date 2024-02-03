@@ -26,4 +26,12 @@ pub fn test_map() {
         // 都是不可变借用
         println!("key:{},value:{}",key,value);
     }
+
+    let mut str: &str = "hello world! ddx , i am your friend";
+    let mut map = HashMap::new();
+    for word in str.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}",map);
 }
