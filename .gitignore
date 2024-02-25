@@ -1,3 +1,5 @@
 .history/
 script/Rust/target/
 .vscode/
+*target*
+*idea*

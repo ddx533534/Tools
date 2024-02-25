@@ -1,3 +1,4 @@
+use std::panic;
 use _trait::Summary;
 
 mod _trait;
@@ -12,6 +13,7 @@ mod _trait_deep;
 mod dyn_vec;
 mod _hashmap;
 mod lifecycle;
+mod _panic;
 
 fn main() {
     // let direction = pattern_match::Direction::East;
@@ -93,7 +95,14 @@ fn main() {
 
     // lifecycle::test_life_cycle();
     // lifecycle::test_life_cycle_function();
-    lifecycle::test_lifecycle_struct();
+    // lifecycle::test_lifecycle_struct();
+
+
+    // _panic::test_panic();
+    // _panic::test_panic_simple();
+    // let res = _panic::test_error_propagation().expect("oh no ~");
+    let res = _panic::test_error_propagation1().expect("on on~");
+    println!("file content is {:?}", res);
 }
 
 
