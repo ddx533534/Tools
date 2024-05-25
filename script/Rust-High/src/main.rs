@@ -4,7 +4,6 @@ use crate::BoxTest::{test_box, test_box_custom};
 mod lifecycle;
 mod closure;
 mod BoxTest;
-
 fn main() {
     // test_life_cycle1();
     // test_reborrow();
