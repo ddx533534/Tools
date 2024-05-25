@@ -48,7 +48,7 @@ pub fn just_do_it2(key: i32, time: i32) {
     let action = || {
         println!(" i will {:?}!", exercise_type);
         thread::sleep(Duration::from_secs(time as u64));
-        println!(" i have been  {:?} for {:?} seconds!", exercise_type, time);
+        println!(" i have been  {:?} for {} seconds!", exercise_type, time);
         time
     };
     match key {
@@ -65,101 +65,101 @@ pub fn test() {
     just_do_it2(key, time);
 }
 
-
-struct Cacher<T>
-    where T: Fn(i32) -> i32 {
-    // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
-    query: T,
-    value: Option<i32>,
-}
-
-impl<T> Cacher<T>
-    where T: Fn(i32) -> i32 {
-    pub fn new(query: T, value: Option<i32>) -> Cacher<T> {
-        Cacher {
-            query,
-            value,
-        }
-    }
-
-    pub fn value(&mut self, arg: i32) -> i32 {
-        match self.value {
-            None => {
-                let res = (self.query)(arg);
-                self.value = Some(res);
-                res
-            }
-            Some(v) => { v }
-        }
-    }
-}
-
-struct Cache<T, U>
-// U实现了Copy特征，后续所有权发生转移时不会报错
-    where T: Fn(U) -> U, U: Copy {
-    // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
-    query: T,
-    value: Option<U>,
-}
-
-impl<T, U> Cache<T, U>
-    where T: Fn(U) -> U, U: Copy {
-    pub fn new(query: T, value: Option<U>) -> Cache<T, U> {
-        Cache {
-            query,
-            value,
-        }
-    }
-
-    pub fn value(&mut self, arg: U) -> U {
-        match self.value {
-            None => {
-                let res = (self.query)(arg);
-                self.value = Some(res);
-                res
-            }
-            Some(v) => { v }
-        }
-    }
-}
-
-struct Cache1<T, U>
-// U实现了Copy特征，后续所有权发生转移时可以copy
-    where T: Fn(U) -> U {
-    // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
-    query: T,
-    value: Option<U>,
-}
-
-impl<T, U> Cache1<T, U>
-    where T: Fn(U) -> U {
-    pub fn new(query: T, value: Option<U>) -> Cache1<T, U> {
-        Cache1 {
-            query,
-            value,
-        }
-    }
-
-    // pub fn value(&mut self, arg: U) -> U {
-    //     match self.value.take() {
-    //         None => {
-    //             let res = (self.query)(arg);
-    //             self.value = Some(res);
-    //             res
-    //         }
-    //         Some(v) => { v }
-    //     }
-    // }
-}
-
-
-pub fn test_closure() {
-    let mut s = "world ".to_string();
-    let update_string = |str| s.push_str(str);
-    // exec(update_string);
-    println!("{:}", s);
-}
-
-fn exec<F: FnMut(&str)>(mut f: F) {
-    f("hello")
-}
+//
+// struct Cacher<T>
+//     where T: Fn(i32) -> i32 {
+//     // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
+//     query: T,
+//     value: Option<i32>,
+// }
+//
+// impl<T> Cacher<T>
+//     where T: Fn(i32) -> i32 {
+//     pub fn new(query: T, value: Option<i32>) -> Cacher<T> {
+//         Cacher {
+//             query,
+//             value,
+//         }
+//     }
+//
+//     pub fn value(&mut self, arg: i32) -> i32 {
+//         match self.value {
+//             None => {
+//                 let res = (self.query)(arg);
+//                 self.value = Some(res);
+//                 res
+//             }
+//             Some(v) => { v }
+//         }
+//     }
+// }
+//
+// struct Cache<T, U>
+// // U实现了Copy特征，后续所有权发生转移时不会报错
+//     where T: Fn(U) -> U, U: Copy {
+//     // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
+//     query: T,
+//     value: Option<U>,
+// }
+//
+// impl<T, U> Cache<T, U>
+//     where T: Fn(U) -> U, U: Copy {
+//     pub fn new(query: T, value: Option<U>) -> Cache<T, U> {
+//         Cache {
+//             query,
+//             value,
+//         }
+//     }
+//
+//     pub fn value(&mut self, arg: U) -> U {
+//         // match self.value {
+//         //     None => {
+//         //         let res = (self.query)(arg);
+//         //         // self.value = Some(res);
+//         //         res
+//         //     }
+//         //     Some(v) => { v }
+//         // }
+//     }
+// }
+//
+// struct Cache1<T, U>
+// // U实现了Copy特征，后续所有权发生转移时可以copy
+//     where T: Fn(U) -> U {
+//     // T为泛型，Fn表示闭包，即query为一个入参和出参都为i32的闭包
+//     query: T,
+//     value: Option<U>,
+// }
+//
+// impl<T, U> Cache1<T, U>
+//     where T: Fn(U) -> U {
+//     pub fn new(query: T, value: Option<U>) -> Cache1<T, U> {
+//         Cache1 {
+//             query,
+//             value,
+//         }
+//     }
+//
+//     // pub fn value(&mut self, arg: U) -> U {
+//     //     match self.value.take() {
+//     //         None => {
+//     //             let res = (self.query)(arg);
+//     //             self.value = Some(res);
+//     //             res
+//     //         }
+//     //         Some(v) => { v }
+//     //     }
+//     // }
+// }
+//
+//
+// pub fn test_closure() {
+//     let mut s = "world ".to_string();
+//     let update_string = |str| s.push_str(str);
+//     exec(update_string);
+//     println!("{:}", s);
+// }
+//
+// fn exec<F: FnMut(&str)>(mut f: F) {
+//     f("hello")
+// }
