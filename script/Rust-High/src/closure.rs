@@ -48,7 +48,7 @@ pub fn just_do_it2(key: i32, time: i32) {
     let action = || {
         println!(" i will {:?}!", exercise_type);
         thread::sleep(Duration::from_secs(time as u64));
-        println!(" i have been  {:?} for {} seconds!", exercise_type, time);
+        println!(" i have been  {:?} for {:?} seconds!", exercise_type, time);
         time
     };
     match key {
@@ -156,7 +156,7 @@ impl<T, U> Cache1<T, U>
 pub fn test_closure() {
     let mut s = "world ".to_string();
     let update_string = |str| s.push_str(str);
-    exec(update_string);
+    // exec(update_string);
     println!("{:}", s);
 }
 
