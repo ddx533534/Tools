@@ -1,3 +1,4 @@
+use crate::BoxTest::{test_box_raw, test_memory_leak};
 use crate::htmltest::html2html;
 use crate::iterator::{test_into_iterator, test_iterator, test_iterator_adapter, test_iterator_self};
 use crate::lifecycle::{test_life_cycle1, test_reborrow};
@@ -14,6 +15,8 @@ mod htmltest;
 mod print_rcdom;
 mod test;
 
+mod BoxTest;
+
 fn main() {
     // test_life_cycle1();
     // test_reborrow();
@@ -27,5 +30,7 @@ fn main() {
     // file_test();
     // html2html();
     // print_rc_dom();
-    test_weak();
+    // test_weak();
+    test_box_raw();
+    // test_memory_leak();
 }

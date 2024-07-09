@@ -1,3 +1,4 @@
+use std::mem;
 use std::ops::Deref;
 
 enum Node {}
@@ -156,3 +157,28 @@ pub fn test_box_auto_deref() {
 }
 
 pub fn display(s: &str) {}
+
+
+pub fn test_box_raw() {
+    let box1 = Box::new(String::from("ddx"));
+    let box1_val = Box::into_raw(box1);
+
+    // box1 的所有权已经发生转移，此处调用box1会报错
+    // 但是有个问题，此处在这使用 LeakSanitizer 并不能检测出内存泄露！奇怪？
+    // println!("box1:{}", box1);
+
+    // 指针类型，指向一个 String 实例
+    println!("box1_val: {:?}", box1_val);
+
+
+    // unsafe {
+    // 从一个指针恢复对应的Box实例
+    //     let box1 = Box::from_raw(box1_val);
+    //     println!("box1:{}", box1);
+    // }
+}
+
+pub fn test_memory_leak(){
+    let xs = vec![0, 1, 2, 3];
+    mem::forget(xs);
+}
