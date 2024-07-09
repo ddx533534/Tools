@@ -47,7 +47,7 @@ pub fn test_consumer_adapter() {
     let arr = vec![123, 123, 132];
     // arr 所有权转移到 sum 中
     let sum: i32 = arr.into_iter().sum();
-    println!("{:?}", arr);
+    println!("{:?}",  sum);
 }
 
 // 迭代器适配器
