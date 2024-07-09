@@ -21,6 +21,8 @@ public class DSAImpl {
 
     public static void generateKeys() {
         try {
+            数字签名和认证，为非对称加密算法
+            KeyPairGenerator.getInstance("RSA").genKeyPair();
             // 1.获取密钥对生成器，标明加密算法
             KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("DSA");
             // 2.密钥对生成器初始化，标明密钥大小
