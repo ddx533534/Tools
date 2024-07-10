@@ -31,6 +31,6 @@ fn main() {
     // html2html();
     // print_rc_dom();
     // test_weak();
-    test_box_raw();
-    // test_memory_leak();
+    // test_box_raw();
+     test_memory_leak();
 }

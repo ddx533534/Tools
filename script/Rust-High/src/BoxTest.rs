@@ -160,14 +160,23 @@ pub fn display(s: &str) {}
 
 
 pub fn test_box_raw() {
-    let box1 = Box::new(String::from("ddx"));
+    let vec1 = vec![0;1000000];
+    let box1 = Box::new(vec1);
     let box1_val = Box::into_raw(box1);
 
     // box1 的所有权已经发生转移，此处调用box1会报错
     // 但是有个问题，此处在这使用 LeakSanitizer 并不能检测出内存泄露！奇怪？
     // println!("box1:{}", box1);
 
-    // 指针类型，指向一个 String 实例
+    //内存泄漏的具体情况分析
+//程序运行期间：
+
+//内存泄漏发生时，程序分配的内存不会被释放，导致内存使用量不断增加。
+//如果内存泄漏严重，可能会导致系统内存耗尽，进而引发程序崩溃或系统性能显著下降。
+//程序运行结束：
+
+//操作系统会回收程序在运行期间分配的所有内存，包括那些未被显式释放的内存。
+//因此，从操作系统角度来看，进程结束后，所有内存（包括泄漏的内存）都会被系统回收，恢复以供其他进程使用。
     println!("box1_val: {:?}", box1_val);
 
 
@@ -179,6 +188,6 @@ pub fn test_box_raw() {
 }
 
 pub fn test_memory_leak(){
-    let xs = vec![0, 1, 2, 3];
+    let xs = vec![0;1000000];
     mem::forget(xs);
 }
