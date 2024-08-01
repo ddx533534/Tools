@@ -3,3 +3,6 @@ script/Rust/target/
 .vscode/
 *target*
 *idea*
+*Cargo.lock*
+*package-lock*
+*node_modules*

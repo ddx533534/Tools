@@ -40,3 +40,9 @@ pub fn test_weak() {
     let str = "添加招商银行卡支付";
     println!("{}",str.chars().count());
 }
+
+
+pub fn poker_game(){
+    let count = 52;
+    let weight = 1;
+}
