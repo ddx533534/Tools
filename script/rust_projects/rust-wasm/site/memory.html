@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>memory show</title>
+</head>
+<body>
+<script>
+    const memory = new WebAssembly.Memory({initial: 10, maximum: 100});
+    // const data = new DataView(memory.buffer);
+    // data.setUint32(0, 99, true);
+    // console.log(data.getUint32(0, true));
+
+    // js:mem 是两级命名空间
+    WebAssembly.instantiateStreaming(fetch("./wasm/memory.wasm"), {js: {mem: memory}}).then(
+        (result) => {
+            const summands = new DataView(memory.buffer);
+            for (let i = 0; i < 10; i++) {
+                summands.setUint32(i * 4, i, true);
+            }
+            const sum = result.instance.exports.accumulate(0, 10);
+            console.log(sum);
+        })
+</script>
+</body>
+</html>
