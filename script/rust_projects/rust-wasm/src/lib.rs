@@ -2,7 +2,7 @@
 extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
-
+// 使用 wasm-pack 打包为wasm
 
 #[wasm_bindgen]
 extern {
@@ -16,7 +16,7 @@ pub fn greet(name: &str) {
 }
 
 #[wasm_bindgen]
-pub fn addTwo(a1: i32, a2: i32) -> i32 {
+pub fn add_two(a1: i32, a2: i32) -> i32 {
     a1 + a2
 }
 

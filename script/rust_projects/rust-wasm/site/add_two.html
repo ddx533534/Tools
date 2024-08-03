@@ -15,7 +15,7 @@
     var b = 2;
     var div_expression = document.getElementById('expression');
     var div_res = document.getElementById('res');
-    div_expression.innerText = `${a}+${b}=`;
+    div_expression.innerText = `${a} + ${b} = `;
     WebAssembly.instantiateStreaming(fetch("./wasm/rust-add.wasm")).then(
         (result) => {
             const sum = result.instance.exports.add_two(a, b);
