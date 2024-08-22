@@ -5,7 +5,7 @@ pub fn thread(){
     // test_thread();
     test_thread_move();
 }
-pub fn test_thread() {
+fn test_thread() {
     let handle = thread::spawn(|| {
         for i in 0..10 {
             println!("hello, i am {}, from spawn", i);
@@ -20,7 +20,7 @@ pub fn test_thread() {
     }
 }
 
-pub fn test_thread_move() {
+fn test_thread_move() {
     let vec = vec![1, 2, 3];
     let handle = thread::spawn(move || {
         println!("vec :{:?}", vec);

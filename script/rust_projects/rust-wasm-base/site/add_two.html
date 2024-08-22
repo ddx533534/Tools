@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>add two</title>
+</head>
+<body>
+<span id="expression">expression:</span>
+<span id="res">res</span>
+<script>
+    // const importObject = (data) => {
+    //     console.log(data)
+    // };
+    var a = 1;
+    var b = 2;
+    var div_expression = document.getElementById('expression');
+    var div_res = document.getElementById('res');
+    div_expression.innerText = `${a} + ${b} = `;
+    WebAssembly.instantiateStreaming(fetch("./wasm/add.wasm")).then(
+        (result) => {
+            const sum = result.instance.exports.add(a, b);
+            console.log(sum)
+            div_res.innerText = sum;
+        })
+</script>
+</body>
+</html>
