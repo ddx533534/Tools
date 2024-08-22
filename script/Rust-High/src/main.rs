@@ -1,4 +1,5 @@
 use crate::BoxTest::{test_box_raw, test_memory_leak};
+use crate::event::event_test;
 use crate::htmltest::html2html;
 use crate::iterator::{test_into_iterator, test_iterator, test_iterator_adapter, test_iterator_self};
 use crate::lifecycle::{test_life_cycle1, test_reborrow};
@@ -20,6 +21,7 @@ mod test;
 mod BoxTest;
 mod macro_test;
 mod thread_test;
+mod event;
 
 fn main() {
     // test_life_cycle1();
@@ -38,5 +40,6 @@ fn main() {
     // test_box_raw();
     //  test_memory_leak();
     //  use_macro_println();
-     thread();
+    //  thread();
+     event_test();
 }
