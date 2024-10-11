@@ -8,6 +8,7 @@ use crate::print_rcdom::print_rc_dom;
 use crate::rc_test::rc_test_1;
 use crate::test::{test_json, test_weak};
 use crate::thread_test::{test_thread, thread};
+use crate::trait_test::trait_test;
 
 mod lifecycle;
 mod closure;
@@ -22,6 +23,7 @@ mod BoxTest;
 mod macro_test;
 mod thread_test;
 mod event;
+mod trait_test;
 
 fn main() {
     // test_life_cycle1();
@@ -41,5 +43,6 @@ fn main() {
     //  test_memory_leak();
     //  use_macro_println();
     //  thread();
-     event_test();
+    //  event_test();
+     trait_test();
 }
