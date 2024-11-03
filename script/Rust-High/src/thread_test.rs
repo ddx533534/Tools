@@ -5,7 +5,7 @@ pub fn thread(){
     // test_thread();
     test_thread_move();
 }
-fn test_thread() {
+pub(crate) fn test_thread() {
     let handle = thread::spawn(|| {
         for i in 0..10 {
             println!("hello, i am {}, from spawn", i);
