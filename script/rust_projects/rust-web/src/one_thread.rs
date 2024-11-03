@@ -1,6 +1,9 @@
 use std::fs;
 use std::io::{BufRead, BufReader, Write};
 use std::net::{TcpListener, TcpStream};
+use crate::one_thread::thread_pool::ThreadPool;
+
+mod thread_pool;
 
 pub fn single_thread_web() {
     tcp_listen();
@@ -9,11 +12,15 @@ pub fn single_thread_web() {
 fn tcp_listen() {
     let listener = TcpListener::bind("0.0.0.0:7878").unwrap_or_else(|e| panic!("bind failed! {}", e.to_string()));
 
+    let thread_pool = ThreadPool::new(4);
+
     for stream in listener.incoming() {
         if let Ok(tcp_stream) = stream {
             // tcp_stream 超出作用域后
             println!("connection establish !");
-            handle_connection(tcp_stream);
+            thread_pool.execute(|| {
+                handle_connection(tcp_stream);
+            });
         } else {
             println!("connection failed !");
         }
