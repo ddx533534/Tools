@@ -4,6 +4,7 @@ use crate::event::event_test;
 use crate::htmltest::html2html;
 use crate::iterator::{test_into_iterator, test_iterator, test_iterator_adapter, test_iterator_self};
 use crate::lifecycle::{test_life_cycle1, test_reborrow};
+use crate::loan_test::loan_test;
 use crate::macro_test::use_macro_println;
 use crate::math_test::test_math;
 use crate::print_rcdom::print_rc_dom;
@@ -28,6 +29,7 @@ mod event;
 mod trait_test;
 mod delegate_test;
 mod math_test;
+mod loan_test;
 
 fn main() {
     // test_life_cycle1();
@@ -50,7 +52,8 @@ fn main() {
     //  event_test();
     //  trait_test();
     //  delegate_test();
-     test_math();
+    //  test_math();
+     loan_test();
 }
 
 
